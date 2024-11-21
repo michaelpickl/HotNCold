@@ -1,0 +1,2 @@
+/Users/emmasophie/Desktop/Studium/Master/3. Semester/Forschungsseminar/Projekt/HotNCold/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp/CMakeLists.txt
+/Users/emmasophie/Desktop/Studium/Master/3. Semester/Forschungsseminar/Projekt/HotNCold/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp/GameActivity/CMakeLists.txt

@@ -1,0 +1,17 @@
+/Users/emmasophie/Desktop/Studium/Master/3. Semester/Forschungsseminar/Projekt/HotNCold/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp/GameActivity/GAToUnityCallbacks.h
+/Users/emmasophie/Desktop/Studium/Master/3. Semester/Forschungsseminar/Projekt/HotNCold/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp/GameActivity/MacroEnd.h
+/Users/emmasophie/Desktop/Studium/Master/3. Semester/Forschungsseminar/Projekt/HotNCold/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp/GameActivity/MacroHeaderBegin.h
+/Users/emmasophie/Desktop/Studium/Master/3. Semester/Forschungsseminar/Projekt/HotNCold/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp/GameActivity/MacroSourceBegin.h
+/Users/emmasophie/Desktop/Studium/Master/3. Semester/Forschungsseminar/Projekt/HotNCold/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp/GameActivity/UGAApplication.h
+/Users/emmasophie/Desktop/Studium/Master/3. Semester/Forschungsseminar/Projekt/HotNCold/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp/GameActivity/UGAConfiguration.h
+/Users/emmasophie/Desktop/Studium/Master/3. Semester/Forschungsseminar/Projekt/HotNCold/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp/GameActivity/UGADebug.h
+/Users/emmasophie/Desktop/Studium/Master/3. Semester/Forschungsseminar/Projekt/HotNCold/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp/GameActivity/UGAEvents.h
+/Users/emmasophie/Desktop/Studium/Master/3. Semester/Forschungsseminar/Projekt/HotNCold/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp/GameActivity/UGAInput.h
+/Users/emmasophie/Desktop/Studium/Master/3. Semester/Forschungsseminar/Projekt/HotNCold/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp/GameActivity/UGASoftKeyboard.h
+/Users/emmasophie/Desktop/Studium/Master/3. Semester/Forschungsseminar/Projekt/HotNCold/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp/GameActivity/UGASoftKeyboardCallbacks.h
+/Users/emmasophie/Desktop/Studium/Master/3. Semester/Forschungsseminar/Projekt/HotNCold/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp/GameActivity/UGATypes.h
+/Users/emmasophie/Desktop/Studium/Master/3. Semester/Forschungsseminar/Projekt/HotNCold/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp/GameActivity/UGAVersion.h
+/Users/emmasophie/Desktop/Studium/Master/3. Semester/Forschungsseminar/Projekt/HotNCold/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp/GameActivity/UnityToGACallbacks.h
+/Users/emmasophie/Desktop/Studium/Master/3. Semester/Forschungsseminar/Projekt/HotNCold/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp/GameActivity/UnityToGAConfigurationCallbacks.h
+/Users/emmasophie/Desktop/Studium/Master/3. Semester/Forschungsseminar/Projekt/HotNCold/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp/GameActivity/UnityToGAKeyEventCallbacks.h
+/Users/emmasophie/Desktop/Studium/Master/3. Semester/Forschungsseminar/Projekt/HotNCold/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp/GameActivity/UnityToGAMotionEventCallbacks.h

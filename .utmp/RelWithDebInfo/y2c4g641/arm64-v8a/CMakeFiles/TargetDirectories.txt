@@ -1,0 +1,5 @@
+/Users/emmasophie/Desktop/Studium/Master/3. Semester/Forschungsseminar/Projekt/HotNCold/.utmp/RelWithDebInfo/y2c4g641/arm64-v8a/CMakeFiles/edit_cache.dir
+/Users/emmasophie/Desktop/Studium/Master/3. Semester/Forschungsseminar/Projekt/HotNCold/.utmp/RelWithDebInfo/y2c4g641/arm64-v8a/CMakeFiles/rebuild_cache.dir
+/Users/emmasophie/Desktop/Studium/Master/3. Semester/Forschungsseminar/Projekt/HotNCold/.utmp/RelWithDebInfo/y2c4g641/arm64-v8a/GameActivity/CMakeFiles/game.dir
+/Users/emmasophie/Desktop/Studium/Master/3. Semester/Forschungsseminar/Projekt/HotNCold/.utmp/RelWithDebInfo/y2c4g641/arm64-v8a/GameActivity/CMakeFiles/edit_cache.dir
+/Users/emmasophie/Desktop/Studium/Master/3. Semester/Forschungsseminar/Projekt/HotNCold/.utmp/RelWithDebInfo/y2c4g641/arm64-v8a/GameActivity/CMakeFiles/rebuild_cache.dir
