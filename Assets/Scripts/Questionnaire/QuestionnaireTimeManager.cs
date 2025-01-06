@@ -1,0 +1,64 @@
+
+using System;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class QuestionnaireTimeManager : MonoBehaviour
+{
+
+    public GameObject questionnaireParentObject;
+    public QuestionnaireSliderController graphicCsSlider;
+
+    public int firstShowSeconds;
+    public int secondShowSeconds;
+    public int thirdShowSeconds;
+
+    private bool firstTimeShown = false;
+    private bool secondTimeShown = false;
+    private bool thirdTimeShown = false;
+
+    private float timestampAtSceneLoad;
+
+    void Start()
+    {
+        questionnaireParentObject.SetActive(false);
+        timestampAtSceneLoad = Time.time;
+        EventManager.StartListening(Const.Events.GraphicCsSubmitted, OnQuestionnaireSubmitted);
+    }
+    
+    void Update()
+    {
+        var timeDelta = Time.time - timestampAtSceneLoad;
+
+        if (!firstTimeShown && timeDelta >= firstShowSeconds)
+        {
+            firstTimeShown = true;
+            graphicCsSlider.ShowAndReset();
+        }
+        
+        if (!secondTimeShown && timeDelta >= secondShowSeconds)
+        {
+            secondTimeShown = true;
+            graphicCsSlider.ShowAndReset();
+        }
+        
+        if (!thirdTimeShown && timeDelta >= thirdShowSeconds)
+        {
+            thirdTimeShown = true;
+            graphicCsSlider.ShowAndReset();
+        }
+    }
+
+    private void Reset()
+    {
+        firstTimeShown = false;
+        secondTimeShown = false;
+        thirdTimeShown = false;
+        timestampAtSceneLoad = Time.time;
+    }
+
+    private void OnQuestionnaireSubmitted()
+    {
+        questionnaireParentObject.SetActive(false);
+    }
+}
