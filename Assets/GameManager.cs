@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int difficulty = 4;
     [SerializeField] private Transform gameHolder;
     [SerializeField] private Transform piecePrefab;
+    [SerializeField] private RectTransform puzzleSpace;
+
 
 
 
@@ -36,6 +38,10 @@ public class GameManager : MonoBehaviour
         dimensions = GetDimensions(jigsawTexture, difficulty);
 
         CreateJigsawPieces(jigsawTexture);
+
+        Scatter();
+
+        UpdateBorder();
     }
 
     Vector2Int GetDimensions(Texture2D jigsawTexture, int difficulty) {
@@ -66,7 +72,6 @@ public class GameManager : MonoBehaviour
 
                 piece.name = $"Piece {(row * dimensions.x) + col}";
                 pieces.Add(piece);
-
                 
                 float width1 = 1f / dimensions.x;
                 float height1 = 1f / dimensions.y;
@@ -83,5 +88,35 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+
+    private void Scatter() {
+        Rect panelRect = puzzleSpace.rect;
+
+        foreach (Transform piece in pieces) {
+            float x = Random.Range(panelRect.xMin, panelRect.xMax);
+            float y = Random.Range(panelRect.yMin, panelRect.yMax);
+            piece.localPosition = new Vector3(x, y, 0);
+        }
+    }
+
+    private void UpdateBorder() {
+        LineRenderer lineRenderer = gameHolder.GetComponent<LineRenderer>();
+
+        float halfWidth = (width * dimensions.x) / 2f;
+        float halfHeight = (height * dimensions.y) / 2f;
+
+        float borderZ = 0f;
+
+        lineRenderer.SetPosition(0, new Vector3(-halfWidth, halfHeight, borderZ));
+        lineRenderer.SetPosition(1, new Vector3(halfWidth, halfHeight, borderZ));
+        lineRenderer.SetPosition(2, new Vector3(halfWidth, -halfHeight, borderZ));
+        lineRenderer.SetPosition(3, new Vector3(-halfWidth, -halfHeight, borderZ));
+
+        lineRenderer.startWidth = 0.005f;
+        lineRenderer.endWidth = 0.005f; 
+
+        lineRenderer.enabled = true;      
+    }
+
     
 }
