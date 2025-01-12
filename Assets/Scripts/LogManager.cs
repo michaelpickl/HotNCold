@@ -9,6 +9,8 @@ public class LogManager : MonoBehaviour
 {
     private static string graphicCsPath = "./Logs/graphicCs/" + ParticipantManager.participantId + ".csv";
     private static string thermalComfortPath = "./Logs/thermalcomfort/" + ParticipantManager.participantId + ".csv";
+
+    private static string puzzlePath = "./Logs/puzzle/" + ParticipantManager.participantId + ".csv";
     private static string pizzaPath = "./Logs/pizza/" + ParticipantManager.participantId + ".csv";
     private static string headPath = "./Logs/head/" + ParticipantManager.participantId + ".csv";
     private static string targetPath = "./Logs/target/" + ParticipantManager.participantId + ".csv";
@@ -67,6 +69,22 @@ public class LogManager : MonoBehaviour
         File.AppendAllText(thermalComfortPath, newLine);
     }
 
+    public static void AddPuzzleLog(string type)
+    {
+        string newLine = ParticipantManager.participantId + "\t";
+        newLine += handSetting + "\t";
+        newLine += type + "\t";
+        newLine += GameTimeManager.Instance.CurrentGameTime;
+        newLine += Environment.NewLine;
+        
+        if (!File.Exists(puzzlePath))
+        {
+            var csvHeader = "participantId\thands\ttype\tgameTime" + Environment.NewLine;
+            File.WriteAllText(puzzlePath, csvHeader);
+        }
+        File.AppendAllText(puzzlePath, newLine);
+    }
+
     public static void AddHeadLog(Transform headTransform)
     {
         
@@ -105,23 +123,23 @@ public class LogManager : MonoBehaviour
         lastHeadLogTime = timeNow;
     }
 
-    public static void AddTargetLog(TargetLogType targetLogType)
-    {
-        DateTime timeNow = DateTime.Now;
+    // public static void AddTargetLog(TargetLogType targetLogType)
+    // {
+    //     DateTime timeNow = DateTime.Now;
         
-        string newLine = ParticipantManager.participantId + "\t";
-        newLine += handSetting + "\t";
-        newLine += targetLogType + "\t";
-        newLine += timeNow;
-        newLine += Environment.NewLine;
+    //     string newLine = ParticipantManager.participantId + "\t";
+    //     newLine += handSetting + "\t";
+    //     newLine += targetLogType + "\t";
+    //     newLine += timeNow;
+    //     newLine += Environment.NewLine;
 
-        if (!File.Exists(targetPath))
-        {
-            var csvHeader = "participantId\thands\ttype\ttimestamp" + Environment.NewLine;
-            File.WriteAllText(targetPath, csvHeader);
-        }
-        File.AppendAllText(targetPath, newLine);
-    }
+    //     if (!File.Exists(targetPath))
+    //     {
+    //         var csvHeader = "participantId\thands\ttype\ttimestamp" + Environment.NewLine;
+    //         File.WriteAllText(targetPath, csvHeader);
+    //     }
+    //     File.AppendAllText(targetPath, newLine);
+    // }
 
     private static float GetFormattedRotation(float eulerAngle)
     {

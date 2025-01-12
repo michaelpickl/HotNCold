@@ -34,18 +34,21 @@ public class QuestionnaireTimeManager : MonoBehaviour
         {
             firstTimeShown = true;
             graphicCsSlider.ShowAndReset();
+            GameTimeManager.Instance.PauseGameTime();
         }
         
         if (!secondTimeShown && timeDelta >= secondShowSeconds)
         {
             secondTimeShown = true;
             graphicCsSlider.ShowAndReset();
+            GameTimeManager.Instance.PauseGameTime();
         }
         
         if (!thirdTimeShown && timeDelta >= thirdShowSeconds)
         {
             thirdTimeShown = true;
             graphicCsSlider.ShowAndReset();
+            GameTimeManager.Instance.PauseGameTime();
         }
     }
 
@@ -60,5 +63,6 @@ public class QuestionnaireTimeManager : MonoBehaviour
     private void OnQuestionnaireSubmitted()
     {
         questionnaireParentObject.SetActive(false);
+        GameTimeManager.Instance.ResumeGameTime();
     }
 }
