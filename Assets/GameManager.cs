@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
                 piece.localPosition = new Vector3(
                     (-width * dimensions.x / 2) + (width * col) + (width / 2),
                     (-height * dimensions.y / 2) + (height * row) + (height / 2),
-                    -1);
+                    0);
                 piece.localScale = new Vector3(width, height, 1f);
 
                 piece.name = $"Piece {(row * dimensions.x) + col}";
@@ -118,5 +118,5 @@ public class GameManager : MonoBehaviour
         lineRenderer.enabled = true;      
     }
 
-    
+
 }
