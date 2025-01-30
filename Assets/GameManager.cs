@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance { get; private set; }
+
     [Header("Game Elements")]
     [Range(2, 6)]
     [SerializeField] private int difficulty = 4;
@@ -12,13 +15,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform piecePrefab;
     [SerializeField] private RectTransform puzzleSpace;
 
-
-
-
     [Header("UI Elements")]
     [SerializeField] private List<Texture2D> imageTextures;
     [SerializeField] private Transform levelSelectPanel;
     [SerializeField] private Image levelSelectPrefab;
+    [SerializeField] private Transform draggingPiece; 
 
 
     private List<Transform> pieces;
@@ -68,21 +69,28 @@ public class GameManager : MonoBehaviour
                     (-width * dimensions.x / 2) + (width * col) + (width / 2),
                     (-height * dimensions.y / 2) + (height * row) + (height / 2),
                     0);
-                piece.localScale = new Vector3(width, height, 1f);
+            
+                piece.localScale = new Vector3(width, height, 0.01f);
+
 
                 piece.name = $"Piece {(row * dimensions.x) + col}";
                 pieces.Add(piece);
-                
+
+                Mesh mesh = piece.GetComponent<MeshFilter>().mesh;
+                Vector2[] uv = mesh.uv;
+
                 float width1 = 1f / dimensions.x;
                 float height1 = 1f / dimensions.y;
 
-                Vector2[] uv = new Vector2[4];
                 uv[0] = new Vector2(width1 * col, height1 * row);
                 uv[1] = new Vector2(width1 * (col + 1), height1 * row);
                 uv[2] = new Vector2(width1 * col, height1 * (row + 1));
                 uv[3] = new Vector2(width1 * (col + 1), height1 * (row + 1));
 
-                Mesh mesh = piece.GetComponent<MeshFilter>().mesh;
+                for (int i = 4; i < uv.Length; i++) {
+                    uv[i] = Vector2.zero;
+                }
+
                 mesh.uv = uv;
                 piece.GetComponent<MeshRenderer>().material.SetTexture("_MainTex", jigsawTexture);
             }
@@ -116,6 +124,74 @@ public class GameManager : MonoBehaviour
         lineRenderer.endWidth = 0.005f; 
 
         lineRenderer.enabled = true;      
+    }
+
+    private void Awake() {
+        if (Instance == null) {
+            Instance = this;
+        }
+        else {
+            Destroy(gameObject);
+        }
+    }
+
+    public void SetDraggingPiece(Transform piece) {
+        draggingPiece = piece;
+    }
+    
+    public void ClearDraggingPiece() {
+        draggingPiece = null;
+    }
+
+    public void CheckPlacement(Transform piece) {
+
+        Debug.Log($"CheckPlacement {piece.name}");
+
+        int pieceIndex = pieces.IndexOf(piece);
+        if (pieceIndex == -1) return;
+
+        int col = pieceIndex % dimensions.x;
+        int row = pieceIndex / dimensions.x;
+
+        Vector3 targetPosition = new Vector3(
+            ((width * dimensions.x / 2) - (width * col) - (width / 2)),
+            (-height * dimensions.y / 2) + (height * row) + (height / 2),
+            0
+        );
+
+        Debug.Log($"targetPosition: {targetPosition}, localPosition: {piece.localPosition}");
+
+        if (Vector3.Distance(piece.localPosition, targetPosition) < (width / 2)) {
+
+            Debug.Log($"Puzzle-Teil {piece.name} richtig platziert!");
+           
+            piece.localPosition = targetPosition;
+
+            piece.transform.rotation = Quaternion.Euler(270,0,90);
+
+            UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable grabInteractable = piece.GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable>();
+            if (grabInteractable != null) {
+                grabInteractable.enabled = false;
+            }
+
+            Rigidbody rb = piece.GetComponent<Rigidbody>();
+            if (rb != null) {
+                rb.isKinematic = true;
+            }
+
+            CheckPuzzleCompletion();
+        }
+    }
+
+    private void CheckPuzzleCompletion() {
+        foreach (Transform piece in pieces) {
+            UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable grabInteractable = piece.GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable>();
+            if (grabInteractable != null && grabInteractable.enabled) {
+                return;
+            }
+        }
+
+        Debug.Log("Puzzle komplett gelöst!");
     }
 
 
