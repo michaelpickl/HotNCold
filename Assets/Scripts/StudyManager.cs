@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class StudyManager : MonoBehaviour
 {
+    public LogManager logManager;
+
     public int actionSceneDurationInSeconds;
     public int neutralSceneDurationInSeconds;
 
@@ -63,8 +65,8 @@ public class StudyManager : MonoBehaviour
     private void Update()
     {
         if (Camera.main is null) return;
-        
-        LogManager.AddHeadLog(Camera.main.transform);
+
+        logManager.AddHeadLog(Camera.main.transform);
     }
 
     private void InitNextSceneCoroutine()

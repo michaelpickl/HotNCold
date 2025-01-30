@@ -7,20 +7,34 @@ using UnityEngine;
 
 public class LogManager : MonoBehaviour
 {
-    private static string graphicCsPath = "./Logs/graphicCs/" + ParticipantManager.participantId + ".csv";
-    private static string thermalComfortPath = "./Logs/thermalcomfort/" + ParticipantManager.participantId + ".csv";
+    private  string graphicCsPath;
+    private  string thermalComfortPath;
 
-    private static string puzzlePath = "./Logs/puzzle/" + ParticipantManager.participantId + ".csv";
-    private static string pizzaPath = "./Logs/pizza/" + ParticipantManager.participantId + ".csv";
-    private static string headPath = "./Logs/head/" + ParticipantManager.participantId + ".csv";
-    private static string targetPath = "./Logs/target/" + ParticipantManager.participantId + ".csv";
+    private  string puzzlePath;
+    private  string pizzaPath;
+    private  string headPath;
+    private  string targetPath;
     
-    private static DateTime lastHeadLogTime = DateTime.Now;
-    private static int headLogIntervalInMs = 100;
+    private  DateTime lastHeadLogTime = DateTime.Now;
+    private  int headLogIntervalInMs = 100;
 
-    public static string handSetting;
+    public string handSetting;
 
-    public static void AddPizzaLog(float score)
+    public void Awake()
+    {
+        Debug.Log("hhsdhdhsdh");
+        Debug.Log(ParticipantManager.participantId);
+
+        graphicCsPath = "./Logs/graphicCs/" + ParticipantManager.participantId + ".csv";
+        thermalComfortPath = "./Logs/thermalcomfort/" + ParticipantManager.participantId + ".csv";
+        puzzlePath = "./Logs/puzzle/" + ParticipantManager.participantId + ".csv";
+        pizzaPath = "./Logs/pizza/" + ParticipantManager.participantId + ".csv";
+        headPath = "./Logs/head/" + ParticipantManager.participantId + ".csv";
+        targetPath = "./Logs/target/" + ParticipantManager.participantId + ".csv";
+    
+    }
+
+    public void AddPizzaLog(float score)
     {
         string newLine = ParticipantManager.participantId + "\t";
         newLine += score;
@@ -34,7 +48,7 @@ public class LogManager : MonoBehaviour
         File.AppendAllText(pizzaPath, newLine);
     }
 
-    public static void AddGraphicCsLog(float sliderValue)
+    public  void AddGraphicCsLog(float sliderValue)
     {
         var participantId = ParticipantManager.participantId;
 
@@ -53,13 +67,19 @@ public class LogManager : MonoBehaviour
         File.AppendAllText(graphicCsPath, csv.ToString());
     }
 
-    public static void AddThermalComfortLog(string question, int score)
+    public void AddThermalComfortLog(string question, int score)
     {
         string newLine = ParticipantManager.participantId + "\t";
         newLine += handSetting + "\t";
         newLine += question + "\t";
         newLine += score;
         newLine += Environment.NewLine;
+
+        string directoryPath = Path.GetDirectoryName(thermalComfortPath);
+        if (!Directory.Exists(directoryPath))
+        {
+            Directory.CreateDirectory(directoryPath);
+        }
         
         if (!File.Exists(thermalComfortPath))
         {
@@ -69,13 +89,19 @@ public class LogManager : MonoBehaviour
         File.AppendAllText(thermalComfortPath, newLine);
     }
 
-    public static void AddPuzzleLog(string type)
+    public  void AddPuzzleLog(string type)
     {
         string newLine = ParticipantManager.participantId + "\t";
         newLine += handSetting + "\t";
         newLine += type + "\t";
         newLine += GameTimeManager.Instance.CurrentGameTime;
         newLine += Environment.NewLine;
+
+        string directoryPath = Path.GetDirectoryName(puzzlePath);
+        if (!Directory.Exists(directoryPath))
+        {
+            Directory.CreateDirectory(directoryPath);
+        }
         
         if (!File.Exists(puzzlePath))
         {
@@ -85,7 +111,7 @@ public class LogManager : MonoBehaviour
         File.AppendAllText(puzzlePath, newLine);
     }
 
-    public static void AddHeadLog(Transform headTransform)
+    public  void AddHeadLog(Transform headTransform)
     {
         
         DateTime timeNow = DateTime.Now;
@@ -112,6 +138,12 @@ public class LogManager : MonoBehaviour
         newLine += zRot + "\t";
         newLine += timeNow;
         newLine += Environment.NewLine;
+
+        string directoryPath = Path.GetDirectoryName(headPath);
+        if (!Directory.Exists(directoryPath))
+        {
+            Directory.CreateDirectory(directoryPath);
+        }
         
         if (!File.Exists(headPath))
         {
@@ -123,7 +155,7 @@ public class LogManager : MonoBehaviour
         lastHeadLogTime = timeNow;
     }
 
-    // public static void AddTargetLog(TargetLogType targetLogType)
+    // public  void AddTargetLog(TargetLogType targetLogType)
     // {
     //     DateTime timeNow = DateTime.Now;
         
@@ -141,7 +173,7 @@ public class LogManager : MonoBehaviour
     //     File.AppendAllText(targetPath, newLine);
     // }
 
-    private static float GetFormattedRotation(float eulerAngle)
+    private  float GetFormattedRotation(float eulerAngle)
     {
         if(eulerAngle <= 180f)
         {

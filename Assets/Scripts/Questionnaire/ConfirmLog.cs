@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class ConfirmLog : MonoBehaviour
 {
+    public LogManager logManager;
 
     public QuestionnaireSliderController sliderController;
     public GameObject questionnaireParentObject;
@@ -15,7 +16,7 @@ public class ConfirmLog : MonoBehaviour
     private bool isRightButtonPressed;
     public void OnConfirmClicked()
     {
-        LogManager.AddGraphicCsLog(sliderController.pinchSlider.value);
+        logManager.AddGraphicCsLog(sliderController.pinchSlider.value);
         EventManager.TriggerEvent(Const.Events.GraphicCsSubmitted);
     }
 

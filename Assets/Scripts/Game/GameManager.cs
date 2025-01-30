@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
+    public LogManager logManager;
+
     [Header("Game Elements")]
     [Range(2, 6)]
     [SerializeField] private int difficulty = 4;
@@ -161,7 +163,7 @@ public class GameManager : MonoBehaviour
 
         Debug.Log($"targetPosition: {targetPosition}, localPosition: {piece.localPosition}");
 
-        if (Vector3.Distance(piece.localPosition, targetPosition) < (width / 2)) {
+        if (Vector3.Distance(piece.localPosition, targetPosition) < (width * 0.75)){//< (width / 2)) {
 
             Debug.Log($"Puzzle-Teil {piece.name} richtig platziert!");
            
@@ -179,6 +181,8 @@ public class GameManager : MonoBehaviour
                 rb.isKinematic = true;
             }
 
+            logManager.AddPuzzleLog("puzzle_piece_set");
+
             CheckPuzzleCompletion();
         }
     }
@@ -192,6 +196,7 @@ public class GameManager : MonoBehaviour
         }
 
         Debug.Log("Puzzle komplett gelöst!");
+        logManager.AddPuzzleLog("puzzle_finished");
     }
 
 
