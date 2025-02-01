@@ -22,15 +22,14 @@ public class LogManager : MonoBehaviour
 
     public void Awake()
     {
-        Debug.Log("hhsdhdhsdh");
         Debug.Log(ParticipantManager.participantId);
 
-        graphicCsPath = "./Logs/graphicCs/" + ParticipantManager.participantId + ".csv";
-        thermalComfortPath = "./Logs/thermalcomfort/" + ParticipantManager.participantId + ".csv";
-        puzzlePath = "./Logs/puzzle/" + ParticipantManager.participantId + ".csv";
-        pizzaPath = "./Logs/pizza/" + ParticipantManager.participantId + ".csv";
-        headPath = "./Logs/head/" + ParticipantManager.participantId + ".csv";
-        targetPath = "./Logs/target/" + ParticipantManager.participantId + ".csv";
+        graphicCsPath = "./Logs/graphicCs/" + ParticipantManager.participantId + "_" + handSetting + ".csv";
+        thermalComfortPath = "./Logs/thermalcomfort/" + ParticipantManager.participantId + "_" + handSetting + ".csv";
+        puzzlePath = "./Logs/puzzle/" + ParticipantManager.participantId + "_" + handSetting + ".csv";
+        pizzaPath = "./Logs/pizza/" + ParticipantManager.participantId + "_" + handSetting + ".csv";
+        headPath = "./Logs/head/" + ParticipantManager.participantId + "_" + handSetting + ".csv";
+        targetPath = "./Logs/target/" + ParticipantManager.participantId + "_" + handSetting + ".csv";
     
     }
 

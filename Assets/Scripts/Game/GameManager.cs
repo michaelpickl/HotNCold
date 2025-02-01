@@ -106,6 +106,11 @@ public class GameManager : MonoBehaviour
             float x = Random.Range(panelRect.xMin, panelRect.xMax);
             float y = Random.Range(panelRect.yMin, panelRect.yMax);
             piece.localPosition = new Vector3(x, y, 0);
+
+            PuzzlePiece puzzlePiece = piece.GetComponent<PuzzlePiece>();
+            if (puzzlePiece != null) {
+                puzzlePiece.SavePosition();
+            }
         }
     }
 
