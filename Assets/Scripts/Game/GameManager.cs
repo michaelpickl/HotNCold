@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.XR.Interaction.Toolkit;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    public TextMeshProUGUI angleText;
     public static GameManager Instance { get; private set; }
 
     public LogManager logManager;
@@ -166,15 +168,19 @@ public class GameManager : MonoBehaviour
             0
         );
 
+        Quaternion targetRotation = Quaternion.Euler(270, 0, 90);
+
         Debug.Log($"targetPosition: {targetPosition}, localPosition: {piece.localPosition}");
 
-        if (Vector3.Distance(piece.localPosition, targetPosition) < (width * 0.75)){//< (width / 2)) {
+        angleText.text = $"Rotation: {Quaternion.Angle(piece.rotation, targetRotation)}°";
+
+        if (Vector3.Distance(piece.localPosition, targetPosition) < (width * 0.75) && Quaternion.Angle(piece.rotation, targetRotation) < 45){
 
             Debug.Log($"Puzzle-Teil {piece.name} richtig platziert!");
            
             piece.localPosition = targetPosition;
 
-            piece.transform.rotation = Quaternion.Euler(270,0,90);
+            piece.transform.rotation = targetRotation;
 
             UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable grabInteractable = piece.GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable>();
             if (grabInteractable != null) {
