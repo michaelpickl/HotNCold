@@ -9,7 +9,7 @@ public class QuestionnaireSliderController : MonoBehaviour
 
     //public PinchSlider pinchSlider;
     public Slider pinchSlider;
-    public float distanceToCamera = .5f;
+    public float distanceToCamera = .7f;
 
     public void ShowAndReset()
     {

@@ -28,7 +28,7 @@ public class QuestionnaireTimeManager : MonoBehaviour
     
     void Update()
     {
-        var timeDelta = Time.time - timestampAtSceneLoad;
+        var timeDelta = GameTimeManager.Instance.CurrentGameTime;//Time.time - timestampAtSceneLoad;
 
         if (!firstTimeShown && timeDelta >= firstShowSeconds)
         {
@@ -62,6 +62,7 @@ public class QuestionnaireTimeManager : MonoBehaviour
 
     private void OnQuestionnaireSubmitted()
     {
+        Debug.Log("RESUME GAME");
         questionnaireParentObject.SetActive(false);
         GameTimeManager.Instance.ResumeGameTime();
     }

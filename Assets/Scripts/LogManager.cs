@@ -4,9 +4,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using UnityEngine;
+using TMPro;
 
 public class LogManager : MonoBehaviour
 {
+    public TextMeshProUGUI debuggingText;
     private  string graphicCsPath;
     private  string thermalComfortPath;
 
@@ -30,7 +32,6 @@ public class LogManager : MonoBehaviour
         pizzaPath = "./Logs/pizza/" + ParticipantManager.participantId + "_" + handSetting + ".csv";
         headPath = "./Logs/head/" + ParticipantManager.participantId + "_" + handSetting + ".csv";
         targetPath = "./Logs/target/" + ParticipantManager.participantId + "_" + handSetting + ".csv";
-    
     }
 
     public void AddPizzaLog(float score)
@@ -53,16 +54,32 @@ public class LogManager : MonoBehaviour
 
         var csv = new StringBuilder();
 
+        debuggingText.text = "0";
+
         string newLine = participantId + "\t";
         newLine += handSetting + "\t";
         newLine += sliderValue;
         csv.AppendLine(newLine);
+
+        debuggingText.text = "1";
+
+        string directoryPath = Path.GetDirectoryName(graphicCsPath);
+        debuggingText.text = "1.1";
+        if (!Directory.Exists(directoryPath))
+        {
+            debuggingText.text = "1.2";
+            Directory.CreateDirectory(directoryPath);
+            debuggingText.text = "1.3";
+        }
+
+        debuggingText.text = "2";
 
         if (!File.Exists(graphicCsPath))
         {
             var csvHeader = "participantId\thands\tscore" + Environment.NewLine;
             File.WriteAllText(graphicCsPath, csvHeader);
         }
+        debuggingText.text = "3";
         File.AppendAllText(graphicCsPath, csv.ToString());
     }
 
@@ -136,6 +153,7 @@ public class LogManager : MonoBehaviour
         newLine += yRot + "\t";
         newLine += zRot + "\t";
         newLine += timeNow;
+        newLine += GameTimeManager.Instance.CurrentGameTime;
         newLine += Environment.NewLine;
 
         string directoryPath = Path.GetDirectoryName(headPath);
@@ -146,7 +164,7 @@ public class LogManager : MonoBehaviour
         
         if (!File.Exists(headPath))
         {
-            var csvHeader = "participantId\thands\txPos\tyPos\tzPos\txRot\tyRot\tzRot\ttimestamp" + Environment.NewLine;
+            var csvHeader = "participantId\thands\txPos\tyPos\tzPos\txRot\tyRot\tzRot\ttimestamp\tgameTime" + Environment.NewLine;
             File.WriteAllText(headPath, csvHeader);
         }
         File.AppendAllText(headPath, newLine);

@@ -203,10 +203,10 @@ public class GameManager : MonoBehaviour
     }
 
     private IEnumerator AnimatePiecePlacement(Transform piece, Vector3 targetPosition, Quaternion targetRotation, float pieceThickness) {
-        float duration = 0.01f; 
+        float duration = 0.05f; 
         float elapsedTime = 0f;
 
-        Vector3 startPosition = targetPosition - new Vector3(0, 0, pieceThickness); 
+        Vector3 startPosition = targetPosition - new Vector3(0, 0, pieceThickness * 2); 
 
         while (elapsedTime < duration)
         {

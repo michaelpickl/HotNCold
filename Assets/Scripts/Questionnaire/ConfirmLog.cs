@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
 
 public class ConfirmLog : MonoBehaviour
 {
@@ -14,10 +16,15 @@ public class ConfirmLog : MonoBehaviour
 
     private bool isLeftButtonPressed;
     private bool isRightButtonPressed;
+    public TextMeshProUGUI debuggingText;
+
+
     public void OnConfirmClicked()
     {
         logManager.AddGraphicCsLog(sliderController.pinchSlider.value);
+        Debug.Log("Confirm: " + sliderController.pinchSlider.value);
         EventManager.TriggerEvent(Const.Events.GraphicCsSubmitted);
+        debuggingText.text = $"Klick: {sliderController.pinchSlider.value}";
     }
 
     public void OnLeftButtonPressBegin()
