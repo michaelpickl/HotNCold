@@ -12,6 +12,7 @@ public class PuzzlePiece : MonoBehaviour
 
     private Rigidbody rb;
     private bool isGrabbed = false;
+    public bool isAnimated = false;
 
     private void Awake() {
         grabInteractable = GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable>();
@@ -29,7 +30,7 @@ public class PuzzlePiece : MonoBehaviour
     }
 
     private void FixedUpdate() {
-        if (!isGrabbed) {
+        if (!isGrabbed && !isAnimated) {
             if (!IsWithinTableBounds()) {
                 ResetPosition();
             }
@@ -54,17 +55,23 @@ public class PuzzlePiece : MonoBehaviour
             lastValidRotation = transform.rotation;
             if (tableCollider != null)
             {
-                float pieceHeight = GetComponent<MeshRenderer>().bounds.size.y;
+                float pieceHeight = GetPieceThickness();
                 if (transform.position.y > tableCollider.bounds.max.y + (pieceHeight / 2))
                 {
                     lastValidPosition.y = tableCollider.bounds.max.y + (pieceHeight / 2);
                 }
             }
         } else {
-            ResetPosition();
+            if(!isAnimated) {
+                ResetPosition();
+            }
         }
 
         GameManager.Instance.CheckPlacement(transform);
+    }
+
+    public float GetPieceThickness(){
+        return GetComponent<MeshRenderer>().bounds.size.y;
     }
 
     private bool IsWithinTableBounds() {

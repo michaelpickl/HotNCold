@@ -178,9 +178,13 @@ public class GameManager : MonoBehaviour
 
             Debug.Log($"Puzzle-Teil {piece.name} richtig platziert!");
            
-            piece.localPosition = targetPosition;
+            // piece.localPosition = targetPosition;
 
-            piece.transform.rotation = targetRotation;
+            // piece.transform.rotation = targetRotation;
+            PuzzlePiece puzzlePiece = piece.GetComponent<PuzzlePiece>();
+            puzzlePiece.isAnimated = true;
+            StartCoroutine(AnimatePiecePlacement(piece, targetPosition, targetRotation, puzzlePiece.GetPieceThickness()));
+            puzzlePiece.isAnimated = false;
 
             UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable grabInteractable = piece.GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable>();
             if (grabInteractable != null) {
@@ -197,6 +201,25 @@ public class GameManager : MonoBehaviour
             CheckPuzzleCompletion();
         }
     }
+
+    private IEnumerator AnimatePiecePlacement(Transform piece, Vector3 targetPosition, Quaternion targetRotation, float pieceThickness) {
+        float duration = 0.01f; 
+        float elapsedTime = 0f;
+
+        Vector3 startPosition = targetPosition - new Vector3(0, 0, pieceThickness); 
+
+        while (elapsedTime < duration)
+        {
+            piece.localPosition = Vector3.Lerp(startPosition, targetPosition, elapsedTime / duration);
+            piece.rotation = Quaternion.Lerp(piece.rotation, targetRotation, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;  
+        }
+
+        piece.localPosition = targetPosition;
+        piece.rotation = targetRotation;
+    }
+
 
     private void CheckPuzzleCompletion() {
         foreach (Transform piece in pieces) {
