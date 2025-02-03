@@ -3753,7 +3753,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   angleText: {fileID: 635182830}
   logManager: {fileID: 2006450881}
-  difficulty: 2
+  difficulty: 4
   gameHolder: {fileID: 1990062168}
   piecePrefab: {fileID: 3279274674992189254, guid: d87ec91fd7f469640b5e94d4f43bb40f, type: 3}
   puzzleSpace: {fileID: 1075807935}

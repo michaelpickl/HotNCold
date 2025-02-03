@@ -108,10 +108,28 @@ public class GameManager : MonoBehaviour
     private void Scatter() {
         Rect panelRect = puzzleSpace.rect;
 
+        float halfWidth = (width * dimensions.x) / 2f;
+        float halfHeight = (height * dimensions.y) / 2f;
+
         foreach (Transform piece in pieces) {
-            float x = Random.Range(panelRect.xMin, panelRect.xMax);
-            float y = Random.Range(panelRect.yMin, panelRect.yMax);
-            piece.localPosition = new Vector3(x, y, 0);
+            // float x = Random.Range(panelRect.xMin, panelRect.xMax);
+            // float y = Random.Range(panelRect.yMin, panelRect.yMax);
+            // piece.localPosition = new Vector3(x, y, 0);
+
+            Vector3 newPosition;
+            bool isValidPosition;
+
+            do {
+                float x = Random.Range(panelRect.xMin, panelRect.xMax);
+                float y = Random.Range(panelRect.yMin, panelRect.yMax);
+
+                newPosition = new Vector3(x, y, 0);
+
+                isValidPosition = (Mathf.Abs(newPosition.x) > halfWidth || Mathf.Abs(newPosition.y) > halfHeight);
+
+            } while (!isValidPosition);
+
+            piece.localPosition = newPosition;
 
             PuzzlePiece puzzlePiece = piece.GetComponent<PuzzlePiece>();
             if (puzzlePiece != null) {
