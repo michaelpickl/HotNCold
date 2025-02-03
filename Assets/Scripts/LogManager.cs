@@ -20,23 +20,24 @@ public class LogManager : MonoBehaviour
     private  DateTime lastHeadLogTime = DateTime.Now;
     private  int headLogIntervalInMs = 100;
 
-    public string handSetting;
+    private string handSetting;
 
     public void Awake()
     {
-        Debug.Log(ParticipantManager.participantId);
+        Debug.Log(Config.participantId);
+        handSetting = Config.handSetting;
 
-        graphicCsPath = "./Logs/graphicCs/" + ParticipantManager.participantId + "_" + handSetting + ".csv";
-        thermalComfortPath = "./Logs/thermalcomfort/" + ParticipantManager.participantId + "_" + handSetting + ".csv";
-        puzzlePath = "./Logs/puzzle/" + ParticipantManager.participantId + "_" + handSetting + ".csv";
-        pizzaPath = "./Logs/pizza/" + ParticipantManager.participantId + "_" + handSetting + ".csv";
-        headPath = "./Logs/head/" + ParticipantManager.participantId + "_" + handSetting + ".csv";
-        targetPath = "./Logs/target/" + ParticipantManager.participantId + "_" + handSetting + ".csv";
+        graphicCsPath = "./Logs/graphicCs/" + Config.participantId + "_" + handSetting + ".csv";
+        thermalComfortPath = "./Logs/thermalcomfort/" + Config.participantId + "_" + handSetting + ".csv";
+        puzzlePath = "./Logs/puzzle/" + Config.participantId + "_" + handSetting + ".csv";
+        pizzaPath = "./Logs/pizza/" + Config.participantId + "_" + handSetting + ".csv";
+        headPath = "./Logs/head/" + Config.participantId + "_" + handSetting + ".csv";
+        targetPath = "./Logs/target/" + Config.participantId + "_" + handSetting + ".csv";
     }
 
     public void AddPizzaLog(float score)
     {
-        string newLine = ParticipantManager.participantId + "\t";
+        string newLine = Config.participantId + "\t";
         newLine += score;
         newLine += Environment.NewLine;
         
@@ -48,9 +49,9 @@ public class LogManager : MonoBehaviour
         File.AppendAllText(pizzaPath, newLine);
     }
 
-    public  void AddGraphicCsLog(float sliderValue)
+    public  void AddGraphicCsLog(float sliderValue, int count)
     {
-        var participantId = ParticipantManager.participantId;
+        var participantId = Config.participantId;
 
         var csv = new StringBuilder();
 
@@ -59,6 +60,7 @@ public class LogManager : MonoBehaviour
         string newLine = participantId + "\t";
         newLine += handSetting + "\t";
         newLine += sliderValue;
+        newLine += count;
         csv.AppendLine(newLine);
 
         debuggingText.text = "1";
@@ -76,7 +78,7 @@ public class LogManager : MonoBehaviour
 
         if (!File.Exists(graphicCsPath))
         {
-            var csvHeader = "participantId\thands\tscore" + Environment.NewLine;
+            var csvHeader = "participantId\thands\tscore\tcount" + Environment.NewLine;
             File.WriteAllText(graphicCsPath, csvHeader);
         }
         debuggingText.text = "3";
@@ -85,7 +87,7 @@ public class LogManager : MonoBehaviour
 
     public void AddThermalComfortLog(string question, int score)
     {
-        string newLine = ParticipantManager.participantId + "\t";
+        string newLine = Config.participantId + "\t";
         newLine += handSetting + "\t";
         newLine += question + "\t";
         newLine += score;
@@ -107,7 +109,7 @@ public class LogManager : MonoBehaviour
 
     public  void AddPuzzleLog(string type)
     {
-        string newLine = ParticipantManager.participantId + "\t";
+        string newLine = Config.participantId + "\t";
         newLine += handSetting + "\t";
         newLine += type + "\t";
         newLine += GameTimeManager.Instance.CurrentGameTime;
@@ -144,7 +146,7 @@ public class LogManager : MonoBehaviour
         float zRot = GetFormattedRotation(headTransform.eulerAngles.z);
         
         
-        string newLine = ParticipantManager.participantId + "\t";
+        string newLine = Config.participantId + "\t";
         newLine += handSetting + "\t";
         newLine += headTransform.position.x + "\t";
         newLine += headTransform.position.y + "\t";
@@ -176,7 +178,7 @@ public class LogManager : MonoBehaviour
     // {
     //     DateTime timeNow = DateTime.Now;
         
-    //     string newLine = ParticipantManager.participantId + "\t";
+    //     string newLine = Config.participantId + "\t";
     //     newLine += handSetting + "\t";
     //     newLine += targetLogType + "\t";
     //     newLine += timeNow;

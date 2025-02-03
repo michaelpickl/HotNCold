@@ -18,10 +18,12 @@ public class ConfirmLog : MonoBehaviour
     private bool isRightButtonPressed;
     public TextMeshProUGUI debuggingText;
 
+    public static int confirmCounter = 0;
 
     public void OnConfirmClicked()
     {
-        //logManager.AddGraphicCsLog(sliderController.pinchSlider.value); // TODO: ENABLE HERE
+        //logManager.AddGraphicCsLog(sliderController.pinchSlider.value, confirmCounter); // TODO: ENABLE HERE
+        confirmCounter++;
         Debug.Log("Confirm: " + sliderController.pinchSlider.value);
         EventManager.TriggerEvent(Const.Events.GraphicCsSubmitted);
         debuggingText.text = $"Klick: {sliderController.pinchSlider.value}";

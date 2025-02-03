@@ -27,31 +27,35 @@ public class QuestionnaireTimeManager : MonoBehaviour
         questionnaireParentObject.SetActive(false);
         timestampAtSceneLoad = Time.time;
         EventManager.StartListening(Const.Events.GraphicCsSubmitted, OnQuestionnaireSubmitted);
+        EventManager.StartListening(Const.Events.TutorialCompleted, OnTutorialCompleted);
     }
     
     void Update()
     {
-        var timeDelta = GameTimeManager.Instance.CurrentGameTime;//Time.time - timestampAtSceneLoad;
+        if(!Config.isTutorial)
+        {
+            var timeDelta = GameTimeManager.Instance.CurrentGameTime;//Time.time - timestampAtSceneLoad;
 
-        if (!firstTimeShown && timeDelta >= firstShowSeconds)
-        {
-            firstTimeShown = true;
-            graphicCsSlider.ShowAndReset();
-            GameTimeManager.Instance.PauseGameTime();
-        }
-        
-        if (!secondTimeShown && timeDelta >= secondShowSeconds)
-        {
-            secondTimeShown = true;
-            graphicCsSlider.ShowAndReset();
-            GameTimeManager.Instance.PauseGameTime();
-        }
-        
-        if (!thirdTimeShown && timeDelta >= thirdShowSeconds)
-        {
-            thirdTimeShown = true;
-            graphicCsSlider.ShowAndReset();
-            GameTimeManager.Instance.PauseGameTime();
+            if (!firstTimeShown && timeDelta >= firstShowSeconds)
+            {
+                firstTimeShown = true;
+                graphicCsSlider.ShowAndReset();
+                GameTimeManager.Instance.PauseGameTime();
+            }
+            
+            if (!secondTimeShown && timeDelta >= secondShowSeconds)
+            {
+                secondTimeShown = true;
+                graphicCsSlider.ShowAndReset();
+                GameTimeManager.Instance.PauseGameTime();
+            }
+            
+            if (!thirdTimeShown && timeDelta >= thirdShowSeconds)
+            {
+                thirdTimeShown = true;
+                graphicCsSlider.ShowAndReset();
+                GameTimeManager.Instance.PauseGameTime();
+            }
         }
     }
 
@@ -75,5 +79,12 @@ public class QuestionnaireTimeManager : MonoBehaviour
             questions.SetActive(false);
             finish.SetActive(true);
         }
+    }
+
+    private void OnTutorialCompleted()
+    {
+        questionnaireParentObject.SetActive(true);
+        questions.SetActive(false);
+        finish.SetActive(true);
     }
 }

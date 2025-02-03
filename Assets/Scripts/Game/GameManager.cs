@@ -39,6 +39,9 @@ public class GameManager : MonoBehaviour
         //foreach (Texture2D texture in imageTextures) {
         //    StartGame(texture);
         //}
+        if(Config.isTutorial){
+            difficulty = 2;
+        }
         StartGame(imageTextures[currentImageIndex]);
         currentImageIndex++;
     }
@@ -272,13 +275,21 @@ public class GameManager : MonoBehaviour
             StartCoroutine(HideParticleEffect()); 
         }
 
-        if(currentImageIndex + 1 > imageTextures.Count)
+        if(Config.isTutorial)
         {
-            currentImageIndex = 0;
+            angleText.text = "Show";
+            EventManager.TriggerEvent(Const.Events.TutorialCompleted);
+            angleText.text = "Show Finish";
         }
-        ClearPuzzlePieces();
-        StartGame(imageTextures[currentImageIndex]);
-        currentImageIndex++;
+        else {
+            if(currentImageIndex + 1 > imageTextures.Count)
+            {
+                currentImageIndex = 0;
+            }
+            ClearPuzzlePieces();
+            StartGame(imageTextures[currentImageIndex]);
+            currentImageIndex++;
+        }
     }
 
     private IEnumerator HideParticleEffect() {
