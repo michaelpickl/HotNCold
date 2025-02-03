@@ -15,6 +15,8 @@ public class StudyManager : MonoBehaviour
     public Material fireMaterial;
     public Material neutralMaterial;
 
+    public Material ghostMaterial;
+
     public TextMeshProUGUI debuggingText;
 
     void Start()
@@ -33,7 +35,11 @@ public class StudyManager : MonoBehaviour
     public void AssignHandMaterial() {
         debuggingText.text = "Assign Hand";
         Material material = neutralMaterial;
-        if(Config.handSetting == "fire")
+        if(Config.isTutorial)
+        {
+            material = ghostMaterial;
+        }
+        else if(Config.handSetting == "fire")
         {
             material = fireMaterial;
         }
