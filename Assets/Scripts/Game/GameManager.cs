@@ -31,10 +31,14 @@ public class GameManager : MonoBehaviour
     private float width;
     private float height;
 
+    private int currentImageIndex = 0;
+
     void Start() {
-        foreach (Texture2D texture in imageTextures) {
-            StartGame(texture);
-        }
+        //foreach (Texture2D texture in imageTextures) {
+        //    StartGame(texture);
+        //}
+        StartGame(imageTextures[currentImageIndex]);
+        currentImageIndex++;
     }
 
     public void StartGame(Texture2D jigsawTexture) {
@@ -152,6 +156,15 @@ public class GameManager : MonoBehaviour
         draggingPiece = null;
     }
 
+    private void ClearPuzzlePieces() {
+        if (pieces != null) {
+            foreach (Transform piece in pieces) {
+                Destroy(piece.gameObject);
+            }
+            pieces.Clear();
+        }
+    }
+
     public void CheckPlacement(Transform piece) {
 
         Debug.Log($"CheckPlacement {piece.name}");
@@ -196,7 +209,7 @@ public class GameManager : MonoBehaviour
                 rb.isKinematic = true;
             }
 
-            logManager.AddPuzzleLog("puzzle_piece_set");
+            //logManager.AddPuzzleLog("puzzle_piece_set"); TODO: ENABLE HERE
 
             CheckPuzzleCompletion();
         }
@@ -222,6 +235,7 @@ public class GameManager : MonoBehaviour
 
 
     private void CheckPuzzleCompletion() {
+        angleText.text = "CheckPuzzleCompletion!";
         foreach (Transform piece in pieces) {
             UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable grabInteractable = piece.GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable>();
             if (grabInteractable != null && grabInteractable.enabled) {
@@ -230,7 +244,15 @@ public class GameManager : MonoBehaviour
         }
 
         Debug.Log("Puzzle komplett gelöst!");
-        logManager.AddPuzzleLog("puzzle_finished");
+        //logManager.AddPuzzleLog("puzzle_finished"); //TODO: ENABLE HERE
+
+        if(currentImageIndex + 1 > imageTextures.Count)
+        {
+            currentImageIndex = 0;
+        }
+        ClearPuzzlePieces();
+        StartGame(imageTextures[currentImageIndex]);
+        currentImageIndex++;
     }
 
 
