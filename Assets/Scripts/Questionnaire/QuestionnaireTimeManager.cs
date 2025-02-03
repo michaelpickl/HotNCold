@@ -13,6 +13,9 @@ public class QuestionnaireTimeManager : MonoBehaviour
     public int secondShowSeconds;
     public int thirdShowSeconds;
 
+    public GameObject questions;
+    public GameObject finish;
+
     private bool firstTimeShown = false;
     private bool secondTimeShown = false;
     private bool thirdTimeShown = false;
@@ -63,7 +66,14 @@ public class QuestionnaireTimeManager : MonoBehaviour
     private void OnQuestionnaireSubmitted()
     {
         Debug.Log("RESUME GAME");
-        questionnaireParentObject.SetActive(false);
-        GameTimeManager.Instance.ResumeGameTime();
+        if(!thirdTimeShown)
+        {
+            questionnaireParentObject.SetActive(false);
+            GameTimeManager.Instance.ResumeGameTime();
+        }
+        else{
+            questions.SetActive(false);
+            finish.SetActive(true);
+        }
     }
 }
