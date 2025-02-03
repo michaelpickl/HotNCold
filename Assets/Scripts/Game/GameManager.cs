@@ -117,10 +117,6 @@ public class GameManager : MonoBehaviour
         float halfHeight = (height * dimensions.y) / 2f;
 
         foreach (Transform piece in pieces) {
-            // float x = Random.Range(panelRect.xMin, panelRect.xMax);
-            // float y = Random.Range(panelRect.yMin, panelRect.yMax);
-            // piece.localPosition = new Vector3(x, y, 0);
-
             Vector3 newPosition;
             bool isValidPosition;
 
@@ -135,6 +131,7 @@ public class GameManager : MonoBehaviour
             } while (!isValidPosition);
 
             piece.localPosition = newPosition;
+            piece.localRotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
 
             PuzzlePiece puzzlePiece = piece.GetComponent<PuzzlePiece>();
             if (puzzlePiece != null) {
