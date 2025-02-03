@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
 
     public LogManager logManager;
 
+    public ParticleSystem finishParticles;
+
     [Header("Game Elements")]
     [Range(2, 6)]
     [SerializeField] private int difficulty = 4;
@@ -264,6 +266,12 @@ public class GameManager : MonoBehaviour
         Debug.Log("Puzzle komplett gelöst!");
         //logManager.AddPuzzleLog("puzzle_finished"); //TODO: ENABLE HERE
 
+        if (finishParticles != null) {
+            finishParticles.gameObject.SetActive(true); 
+            finishParticles.Play();
+            StartCoroutine(HideParticleEffect()); 
+        }
+
         if(currentImageIndex + 1 > imageTextures.Count)
         {
             currentImageIndex = 0;
@@ -271,6 +279,15 @@ public class GameManager : MonoBehaviour
         ClearPuzzlePieces();
         StartGame(imageTextures[currentImageIndex]);
         currentImageIndex++;
+    }
+
+    private IEnumerator HideParticleEffect() {
+        yield return new WaitForSeconds(3.5f); 
+
+        if (finishParticles != null) {
+            finishParticles.Stop(); 
+            finishParticles.gameObject.SetActive(false); 
+        }
     }
 
 
