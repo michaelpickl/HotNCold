@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public LogManager logManager;
 
     public ParticleSystem finishParticles;
+    public GameObject frame;
 
     [Header("Game Elements")]
     [Range(2, 6)]
@@ -23,6 +24,8 @@ public class GameManager : MonoBehaviour
 
     [Header("UI Elements")]
     [SerializeField] private List<Texture2D> imageTextures;
+
+    [SerializeField] private Texture2D tutorialTexture;
     [SerializeField] private Transform levelSelectPanel;
     [SerializeField] private Image levelSelectPrefab;
     [SerializeField] private Transform draggingPiece; 
@@ -33,20 +36,22 @@ public class GameManager : MonoBehaviour
     private float width;
     private float height;
 
-    private int currentImageIndex = 0;
+    private int currentImageIndex = 2;
 
     void Start() {
-        //foreach (Texture2D texture in imageTextures) {
-        //    StartGame(texture);
-        //}
+        currentImageIndex = Config.startImageIndex;
         if(Config.isTutorial){
             difficulty = 2;
+            StartGame(tutorialTexture);
         }
-        StartGame(imageTextures[currentImageIndex]);
-        currentImageIndex++;
+        else {
+            StartGame(imageTextures[currentImageIndex]);
+            currentImageIndex++;
+        }
     }
 
     public void StartGame(Texture2D jigsawTexture) {
+        ChangeFramePicture(jigsawTexture);
         pieces = new List<Transform>();
 
         dimensions = GetDimensions(jigsawTexture, difficulty);
@@ -56,6 +61,16 @@ public class GameManager : MonoBehaviour
         Scatter();
 
         UpdateBorder();
+    }
+
+    private void ChangeFramePicture(Texture2D jigsawTexture){
+        Renderer renderer = frame.GetComponent<Renderer>();
+        if (renderer != null && renderer.materials.Length >= 2) {
+            angleText.text = "FRAME";
+            Material[] materials = renderer.materials; 
+            materials[1].SetTexture("_BaseMap", jigsawTexture);
+            renderer.materials = materials; 
+        }
     }
 
     Vector2Int GetDimensions(Texture2D jigsawTexture, int difficulty) {
@@ -205,8 +220,6 @@ public class GameManager : MonoBehaviour
 
         Debug.Log($"targetPosition: {targetPosition}, localPosition: {piece.localPosition}");
 
-        angleText.text = $"Rotation: {Quaternion.Angle(piece.rotation, targetRotation)}°";
-
         if (Vector3.Distance(piece.localPosition, targetPosition) < (width * 0.75) && Quaternion.Angle(piece.rotation, targetRotation) < 45){
 
             Debug.Log($"Puzzle-Teil {piece.name} richtig platziert!");
@@ -255,7 +268,6 @@ public class GameManager : MonoBehaviour
 
 
     private void CheckPuzzleCompletion() {
-        angleText.text = "CheckPuzzleCompletion!";
         foreach (Transform piece in pieces) {
             UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable grabInteractable = piece.GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable>();
             if (grabInteractable != null && grabInteractable.enabled) {
@@ -274,9 +286,7 @@ public class GameManager : MonoBehaviour
 
         if(Config.isTutorial)
         {
-            angleText.text = "Show";
             EventManager.TriggerEvent(Const.Events.TutorialCompleted);
-            angleText.text = "Show Finish";
         }
         else {
             if(currentImageIndex + 1 > imageTextures.Count)

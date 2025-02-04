@@ -26,7 +26,6 @@ public class ConfirmLog : MonoBehaviour
         confirmCounter++;
         Debug.Log("Confirm: " + sliderController.pinchSlider.value);
         EventManager.TriggerEvent(Const.Events.GraphicCsSubmitted);
-        debuggingText.text = $"Klick: {sliderController.pinchSlider.value}";
     }
 
     public void OnLeftButtonPressBegin()

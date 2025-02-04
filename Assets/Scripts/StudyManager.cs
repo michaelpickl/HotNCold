@@ -21,7 +21,6 @@ public class StudyManager : MonoBehaviour
 
     void Start()
     {
-        debuggingText.text = "Assign Hand 0";
         AssignHandMaterial();
     }
 
@@ -33,7 +32,6 @@ public class StudyManager : MonoBehaviour
     }
 
     public void AssignHandMaterial() {
-        debuggingText.text = "Assign Hand";
         Material material = neutralMaterial;
         if(Config.isTutorial)
         {
@@ -48,10 +46,8 @@ public class StudyManager : MonoBehaviour
             material = iceMaterial;
         }
 
-        debuggingText.text = "Assign Hand 1";
         if (leftHand != null) {
             Renderer leftRenderer = leftHand.GetComponent<Renderer>();
-            debuggingText.text = "Assign Hand 2";
             if (leftRenderer != null && leftRenderer.materials.Length >= 2) {
                 Material[] materials = leftRenderer.materials; 
                 materials[1] = material; 

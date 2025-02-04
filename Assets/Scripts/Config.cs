@@ -14,11 +14,15 @@ public class Config : MonoBehaviour
     public static bool isTutorial;
     public bool isTutorialEditor;
 
+    public static int startImageIndex;
+    public int startImageIndexEditor;
+
 
     private void Awake()
     {
         participantId = participantIdEditor;
         handSetting = handSettingEditor;
         isTutorial = isTutorialEditor;
+        startImageIndex = startImageIndexEditor;
     }
 }

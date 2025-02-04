@@ -55,33 +55,23 @@ public class LogManager : MonoBehaviour
 
         var csv = new StringBuilder();
 
-        debuggingText.text = "0";
-
         string newLine = participantId + "\t";
         newLine += handSetting + "\t";
         newLine += sliderValue;
         newLine += count;
         csv.AppendLine(newLine);
 
-        debuggingText.text = "1";
-
         string directoryPath = Path.GetDirectoryName(graphicCsPath);
-        debuggingText.text = "1.1";
         if (!Directory.Exists(directoryPath))
         {
-            debuggingText.text = "1.2";
             Directory.CreateDirectory(directoryPath);
-            debuggingText.text = "1.3";
         }
-
-        debuggingText.text = "2";
 
         if (!File.Exists(graphicCsPath))
         {
             var csvHeader = "participantId\thands\tscore\tcount" + Environment.NewLine;
             File.WriteAllText(graphicCsPath, csvHeader);
         }
-        debuggingText.text = "3";
         File.AppendAllText(graphicCsPath, csv.ToString());
     }
 
