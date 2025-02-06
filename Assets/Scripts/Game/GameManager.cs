@@ -53,6 +53,11 @@ public class GameManager : MonoBehaviour
     void Update() {
         if (Input.GetKey(KeyCode.N) && Input.GetKey(KeyCode.G))
         {
+            if(currentImageIndex + 1 > imageTextures.Count)
+            {
+                currentImageIndex = 0;
+            }
+            ClearPuzzlePieces();
             StartGame(imageTextures[currentImageIndex]);
             currentImageIndex++;
         }
