@@ -25,6 +25,10 @@ public class GameTimeManager : MonoBehaviour
         {
             elapsedTime += Time.deltaTime;
         }
+        if (Input.GetKey(KeyCode.T))
+        {
+            ResetGameTime();
+        }
     }
 
     public float CurrentGameTime

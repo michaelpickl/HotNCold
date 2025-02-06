@@ -50,6 +50,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void Update() {
+        if (Input.GetKey(KeyCode.N) && Input.GetKey(KeyCode.G))
+        {
+            StartGame(imageTextures[currentImageIndex]);
+            currentImageIndex++;
+        }
+    }
+
     public void StartGame(Texture2D jigsawTexture) {
         ChangeFramePicture(jigsawTexture);
         pieces = new List<Transform>();
