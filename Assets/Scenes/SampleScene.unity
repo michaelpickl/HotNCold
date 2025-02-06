@@ -1309,7 +1309,6 @@ MonoBehaviour:
   fireMaterial: {fileID: 2100000, guid: 196a83e4fac7a644ebc189706f6c2082, type: 2}
   neutralMaterial: {fileID: 2100000, guid: 470aa739c14d243308e379704cad0e9c, type: 2}
   ghostMaterial: {fileID: -876546973899608171, guid: 4ff4bf42ffc12e34a9c53b2f216f5442, type: 3}
-  debuggingText: {fileID: 635182830}
 --- !u!4 &278035467
 Transform:
   m_ObjectHideFlags: 0
@@ -1515,9 +1514,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questionnaireParentObject: {fileID: 1975198539}
   graphicCsSlider: {fileID: 1975198544}
-  firstShowSeconds: 3
-  secondShowSeconds: 30
-  thirdShowSeconds: 60
+  firstShowSeconds: 300
+  secondShowSeconds: 600
+  thirdShowSeconds: 900
   questions: {fileID: 546429454}
   finish: {fileID: 1178961355}
 --- !u!1 &410087039
@@ -3834,11 +3833,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e53fcc2d2f33d47bd1fccf23c4f369, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  angleText: {fileID: 635182830}
   logManager: {fileID: 2006450881}
   finishParticles: {fileID: 1999400709}
   frame: {fileID: 1375737368}
-  difficulty: 4
+  difficulty: 5
   gameHolder: {fileID: 1990062168}
   piecePrefab: {fileID: 3279274674992189254, guid: d87ec91fd7f469640b5e94d4f43bb40f, type: 3}
   puzzleSpace: {fileID: 1075807935}
@@ -3846,6 +3844,22 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 1f17e5664d33b2847b51f3d37ab8e87c, type: 3}
   - {fileID: 2800000, guid: 65d9693f880870f4b8c2a009135fb428, type: 3}
   - {fileID: 2800000, guid: fc73465f1bcac6b45838dba9b402bc4f, type: 3}
+  - {fileID: 2800000, guid: 4c78acc868e3c4406b170f48781961e0, type: 3}
+  - {fileID: 2800000, guid: 6893217d7af684a3b9f533950cc48042, type: 3}
+  - {fileID: 2800000, guid: 6d41c9ca864ab4719b7a3ff8893e6d67, type: 3}
+  - {fileID: 2800000, guid: 9ee370937ce50474e92b77dfbbe8eaec, type: 3}
+  - {fileID: 2800000, guid: 4ae61282e791143599553833b60d58e2, type: 3}
+  - {fileID: 2800000, guid: 24591733b296a4a59aeaf5e0d1e45763, type: 3}
+  - {fileID: 2800000, guid: f7e81dc79fc2f44188375c4d357a9ab7, type: 3}
+  - {fileID: 2800000, guid: a6b9fe33f3a3f45638d4b3ab2954b9a8, type: 3}
+  - {fileID: 2800000, guid: 6a396ff5fda81413eb5b51c180969faf, type: 3}
+  - {fileID: 2800000, guid: 54e9c8ea2431e47f2b2ce4f38694a2a6, type: 3}
+  - {fileID: 2800000, guid: 924a558639f5e48a292b09e4d67a5142, type: 3}
+  - {fileID: 2800000, guid: a65ec388c096e407cb32fdfe1de80efd, type: 3}
+  - {fileID: 2800000, guid: c292d7da7baff41da8838ce82acf629a, type: 3}
+  - {fileID: 2800000, guid: 3b438da2e323c466d86587cec9b8cc77, type: 3}
+  - {fileID: 2800000, guid: a65ec388c096e407cb32fdfe1de80efd, type: 3}
+  - {fileID: 2800000, guid: f95ad0257ffab4ba98d334871ac8cfa9, type: 3}
   tutorialTexture: {fileID: 2800000, guid: 1d04757c1880bfa458944c8662fedf06, type: 3}
   levelSelectPanel: {fileID: 0}
   levelSelectPrefab: {fileID: 0}
@@ -6045,7 +6059,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1293287989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9159,7 +9173,6 @@ MonoBehaviour:
   logManager: {fileID: 2006450881}
   sliderController: {fileID: 1975198544}
   questionnaireParentObject: {fileID: 1975198539}
-  debuggingText: {fileID: 635182830}
 --- !u!1 &1918767467
 GameObject:
   m_ObjectHideFlags: 0
@@ -9874,7 +9887,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a08f88ce567b4405942d70f351ceb30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debuggingText: {fileID: 635182830}
 --- !u!4 &2006450882
 Transform:
   m_ObjectHideFlags: 0

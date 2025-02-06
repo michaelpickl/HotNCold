@@ -17,7 +17,7 @@ public class StudyManager : MonoBehaviour
 
     public Material ghostMaterial;
 
-    public TextMeshProUGUI debuggingText;
+    //public TextMeshProUGUI debuggingText;
 
     void Start()
     {
@@ -28,7 +28,7 @@ public class StudyManager : MonoBehaviour
     {
         if (Camera.main is null) return;
 
-        //logManager.AddHeadLog(Camera.main.transform); TODO: ENABLE HERE
+        logManager.AddHeadLog(Camera.main.transform);
     }
 
     public void AssignHandMaterial() {

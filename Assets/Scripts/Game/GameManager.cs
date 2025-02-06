@@ -7,7 +7,7 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    public TextMeshProUGUI angleText;
+    //public TextMeshProUGUI angleText;
     public static GameManager Instance { get; private set; }
 
     public LogManager logManager;
@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
     private void ChangeFramePicture(Texture2D jigsawTexture){
         Renderer renderer = frame.GetComponent<Renderer>();
         if (renderer != null && renderer.materials.Length >= 2) {
-            angleText.text = "FRAME";
+            //angleText.text = "FRAME";
             Material[] materials = renderer.materials; 
             materials[1].SetTexture("_BaseMap", jigsawTexture);
             renderer.materials = materials; 
@@ -242,7 +242,7 @@ public class GameManager : MonoBehaviour
                 rb.isKinematic = true;
             }
 
-            //logManager.AddPuzzleLog("puzzle_piece_set"); TODO: ENABLE HERE
+            logManager.AddPuzzleLog("puzzle_piece_set");
 
             CheckPuzzleCompletion();
         }
@@ -276,7 +276,7 @@ public class GameManager : MonoBehaviour
         }
 
         Debug.Log("Puzzle komplett gelöst!");
-        //logManager.AddPuzzleLog("puzzle_finished"); //TODO: ENABLE HERE
+        logManager.AddPuzzleLog("puzzle_finished");
 
         if (finishParticles != null) {
             finishParticles.gameObject.SetActive(true); 

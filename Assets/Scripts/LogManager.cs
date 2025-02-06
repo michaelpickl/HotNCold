@@ -8,7 +8,7 @@ using TMPro;
 
 public class LogManager : MonoBehaviour
 {
-    public TextMeshProUGUI debuggingText;
+    //public TextMeshProUGUI debuggingText;
     private  string graphicCsPath;
     private  string thermalComfortPath;
 
